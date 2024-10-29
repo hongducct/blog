@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $fillable = ['tag_name'];
+    use HasFactory;
 
-    public function blogs()
+    protected $fillable = [
+        'tag_name',
+    ];
+
+    // Mối quan hệ với Post thông qua bảng trung gian 'blog_tag'
+    public function posts()
     {
-        return $this->belongsToMany(Post::class, 'post_tag');
+        return $this->belongsToMany(Post::class, 'blog_tag');
     }
 }
